@@ -1,0 +1,10 @@
+{
+  "lang": "es",
+  "dir": "ltr",
+  "name": "Tarjeta navidad",
+  "description": "Feliz navidad te desea Promo Espacio",
+  "short_name": "Tarjeta",
+  "display": "fullscreen",
+  "orientation": "landscape",
+  "background_color": "black",
+}

@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+<!-- three.js library -->
+<script  src='https://cdnjs.cloudflare.com/ajax/libs/three.js/99/three.min.js'></script>
+<!-- ar.js -->
+<script  src="ar.js"></script>
+<script defer>THREEx.ArToolkitContext.baseURL = '../'</script>
+<script src="FBXLoader.js"></script>
+<link rel="manifest" href="manifest.json">
+
+<script>
+var inicio;
+var inicio1;
+var inicio2;
+var inicio3;
+var inicio4;
+var numero = 1;
+var validadorFrame = 1;
+var orientacionAnt = 0; //0 vertical / 1 horizontal
+var orientacionAct = 0;
+
+
+
+function inicio(){
+	inicio = document.getElementById("inicio");
+    inicio1 = document.getElementById("inicio1");
+    inicio2 = document.getElementById("inicio2");
+    inicio3 = document.getElementById("inicio3");
+    inicio4 = document.getElementById("inicio4");
+	
+	inicio.src = "iniciov.png";
+	inicio1.src = "inicio1v.png";
+	inicio2.src = "inicio2v.png";
+	inicio3.src = "inicio3v.png";
+	inicio4.src = "inicio4v.png";
+	mostrarSlide();
+	requestAnimationFrame(validarOrientacion);
+	requestAnimationFrame(agrandar);
+	requestAnimationFrame(init);
+	
+}
+function mostrarSlide(){
+	if(numero == 1){
+		inicio.style.display="block";
+		inicio1.style.display="block";
+		inicio2.style.display="none";
+		inicio3.style.display="none";
+		inicio4.style.display="none";
+	}
+	if(numero == 2){
+		inicio.style.display="block";
+		inicio1.style.display="none";
+		inicio2.style.display="block";
+		inicio3.style.display="none";
+		inicio4.style.display="none";
+	}
+	if(numero == 3){
+		inicio.style.display="block";
+		inicio1.style.display="none";
+		inicio2.style.display="none";
+		inicio3.style.display="block";
+		inicio4.style.display="none";
+	}
+	if(numero == 4){
+		inicio.style.display="block";
+		inicio1.style.display="none";
+		inicio2.style.display="none";
+		inicio3.style.display="none";
+		inicio4.style.display="block";
+	}
+	if(numero < 4){
+		setTimeout(function(){
+			numero++;
+			mostrarSlide(numero)
+		},8000);
+		
+		
+	}
+}
+function validarOrientacion(){
+    
+	orientacionAct = window.innerHeight > window.innerWidth ? 0 : 1;
+	
+    if( orientacionAct != orientacionAnt){
+		if(orientacionAct == 0){
+			inicio.src = "iniciov.png";
+			inicio1.src = "inicio1v.png";
+			inicio2.src = "inicio2v.png";
+			inicio3.src = "inicio3v.png";
+			inicio4.src = "inicio4v.png";
+		}else{
+			inicio.src = "inicioh.png";
+			inicio1.src = "inicio1h.png";
+			inicio2.src = "inicio2h.png";
+			inicio3.src = "inicio3h.png";
+			inicio4.src = "inicio4h.png";
+		}
+		inicio.style.width = "100%";
+		inicio.style.height = "100%";
+		inicio.style.top = "0";
+		inicio.style.left = "0";
+		inicio1.style.width = "100%";
+		inicio1.style.height = "100%";
+		inicio1.style.top = "0";
+		inicio1.style.left = "0";
+		inicio2.style.width = "100%";
+		inicio2.style.height = "100%";
+		inicio2.style.top = "0";
+		inicio2.style.left = "0";
+		inicio3.style.width = "100%";
+		inicio3.style.height = "100%";
+		inicio3.style.top = "0";
+		inicio3.style.left = "0";
+		inicio4.style.width = "100%";
+		inicio4.style.height = "100%";
+		inicio4.style.top = "0";
+		inicio4.style.left = "0";
+		orientacionAnt = orientacionAct;
+	
+	}
+	
+	requestAnimationFrame(validarOrientacion);
+}
+function ocultarInicio(){
+	inicio.style.display="none";
+	inicio1.style.display="none";
+	inicio2.style.display="none";
+	inicio3.style.display="none";
+	inicio4.style.display="none";
+	openFullscreen();
+	
+}
+function agrandar(){
+	var width;
+	var height;
+	var left = 0;
+	var top = 0;
+	var incremento = 1;
+	var rect;
+	
+	if(validadorFrame % 5 == 0){
+		if (numero == 1){
+			width = parseInt(inicio1.width, 10) + incremento;
+			height = parseInt(inicio1.height, 10) + incremento;
+			rect = inicio1.getBoundingClientRect();
+			left = rect.left - incremento;
+			top = rect.top - incremento;
+			
+			//alert(width);
+			inicio1.style.width = width + 'px';
+			inicio1.style.height = height + 'px';
+			inicio1.style.left = left + 'px';
+			inicio1.style.top = top + 'px';
+			
+		}
+		if (numero == 2){
+			width = parseInt(inicio2.width, 10) + incremento;
+			height = parseInt(inicio2.height, 10) + incremento;
+			rect = inicio2.getBoundingClientRect();
+			left = rect.left - incremento;
+			top = rect.top - incremento;
+			
+			//alert(width);
+			inicio2.style.width = width + 'px';
+			inicio2.style.height = height + 'px';
+			inicio2.style.left = left + 'px';
+			inicio2.style.top = top + 'px';
+			
+		}
+		if (numero == 3){
+			width = parseInt(inicio3.width, 10) + incremento;
+			height = parseInt(inicio3.height, 10) + incremento;
+			rect = inicio3.getBoundingClientRect();
+			left = rect.left - incremento;
+			top = rect.top - incremento;
+			
+			//alert(width);
+			inicio3.style.width = width + 'px';
+			inicio3.style.height = height + 'px';
+			inicio3.style.left = left + 'px';
+			inicio3.style.top = top + 'px';
+			
+		}
+		
+		
+		
+		validadorFrame = 0;
+	
+	}
+	
+	validadorFrame++;
+	if(numero < 4){
+		requestAnimationFrame(agrandar);
+	}
+}
+var elem = document.documentElement;
+/* View in fullscreen */
+function openFullscreen() {
+  if (elem.requestFullscreen) {
+    elem.requestFullscreen();
+  } else if (elem.mozRequestFullScreen) { /* Firefox */
+    elem.mozRequestFullScreen();
+  } else if (elem.webkitRequestFullscreen) { /* Chrome, Safari and Opera */
+    elem.webkitRequestFullscreen();
+  } else if (elem.msRequestFullscreen) { /* IE/Edge */
+    elem.msRequestFullscreen();
+  }
+}
+</script>
+<script >
+async function init(){
+	//////////////////////////////////////////////////////////////////////////////////
+	//		Init v2.0
+	//////////////////////////////////////////////////////////////////////////////////
+	// init renderer
+	var mixers = [];
+	var clock = new THREE.Clock();
+	var renderer	= new THREE.WebGLRenderer({
+		// antialias	: true,
+		alpha: true
+	});
+	var light;
+	renderer.setClearColor(new THREE.Color('lightgrey'), 0)
+	// renderer.setPixelRatio( 1/2 );
+	renderer.setSize( window.innerWidth, window.innerHeight );
+	renderer.domElement.style.position = 'absolute'
+	renderer.domElement.style.top = '0px'
+	renderer.domElement.style.left = '0px'
+	document.body.appendChild( renderer.domElement );
+	// array of functions for the rendering loop
+	var onRenderFcts= [];
+	// init scene and camera
+	var scene	= new THREE.Scene();
+	scene.scale.set(0.001,0.001,0.001);
+	//////////////////////////////////////////////////////////////////////////////////
+	//		Initialize a basic camera
+	//////////////////////////////////////////////////////////////////////////////////
+	// Create a camera
+	var camera = new THREE.Camera();
+	scene.add(camera);
+	
+	
+	light = new THREE.HemisphereLight( 0xffffff, 0x444444 );
+	light.position.set( 0, 200, 0 );
+	scene.add( light );
+	////////////////////////////////////////////////////////////////////////////////
+	//          handle arToolkitSource
+	////////////////////////////////////////////////////////////////////////////////
+	var arToolkitSource = new THREEx.ArToolkitSource({
+		// to read from the webcam 
+		sourceType : 'webcam',
+		// to read from an image
+		// sourceType : 'image',
+		// sourceUrl : THREEx.ArToolkitContext.baseURL + '../data/images/img.jpg',		
+		// to read from a video
+		// sourceType : 'video',
+		// sourceUrl : THREEx.ArToolkitContext.baseURL + '../data/videos/headtracking.mp4',		
+	})
+	arToolkitSource.init(function onReady(){
+		onResize()
+	})
+	
+	// handle resize
+	window.addEventListener('resize', function(){
+		onResize()
+	})
+	function onResize(){
+		arToolkitSource.onResize()	
+		arToolkitSource.copySizeTo(renderer.domElement)	
+		if( arToolkitContext.arController !== null ){
+			arToolkitSource.copySizeTo(arToolkitContext.arController.canvas)	
+		}	
+	}
+	////////////////////////////////////////////////////////////////////////////////
+	//          initialize arToolkitContext
+	////////////////////////////////////////////////////////////////////////////////
+	
+	// create atToolkitContext
+	var arToolkitContext = new THREEx.ArToolkitContext({
+		cameraParametersUrl:  'camera_para.dat',
+		detectionMode: 'mono',
+		maxDetectionRate: 30,
+		canvasWidth: 80*3,
+		canvasHeight: 60*3,
+	})
+	// initialize it
+	arToolkitContext.init(function onCompleted(){
+		// copy projection matrix to camera
+		camera.projectionMatrix.copy( arToolkitContext.getProjectionMatrix() );
+	})
+	// update artoolkit on every frame
+	onRenderFcts.push(function(){
+		if( arToolkitSource.ready === false )	return
+		arToolkitContext.update( arToolkitSource.domElement )
+	})
+	
+	
+	////////////////////////////////////////////////////////////////////////////////
+	//          Create a ArMarkerControls
+	////////////////////////////////////////////////////////////////////////////////
+	
+	
+	
+	
+	var markerRoot = new THREE.Group
+	scene.add(markerRoot)
+	var artoolkitMarker = new THREEx.ArMarkerControls(arToolkitContext, markerRoot, {
+		type : 'pattern',
+		patternUrl :  'PROMO.patt'
+	})
+	// build a smoothedControls
+	var smoothedRoot = new THREE.Group()
+	scene.add(smoothedRoot)
+	
+	var smoothedControls = new THREEx.ArSmoothedControls(smoothedRoot, {
+		lerpPosition: 0.4,
+		lerpQuaternion: 0.3,
+		lerpScale: 1,
+	})
+	onRenderFcts.push(function(delta){
+		smoothedControls.update(markerRoot)
+	})
+	//////////////////////////////////////////////////////////////////////////////////
+	//		add an object in the scene
+	//////////////////////////////////////////////////////////////////////////////////
+	var arWorldRoot = smoothedRoot
+	var textureLoader = new THREE.TextureLoader();
+	var map = textureLoader.load('pixietodo.jpg');
+	var material = new THREE.MeshPhongMaterial({map: map});
+	
+	var loader = new THREE.FBXLoader();
+	loader.load( 'prueba13.fbx', function ( object ) {
+		object.mixer = new THREE.AnimationMixer( object );
+		mixers.push( object.mixer );
+		
+		var action = object.mixer.clipAction( object.animations[ 0 ] );
+		action.play();
+		
+		object.traverse( function ( child ) {
+			if ( child.isMesh ) {
+				child.material = material;
+			}
+		} );
+		//object.scale(0.5,0.5,0.5);
+		//scene.add(onject);
+		arWorldRoot.add( object );
+		
+		var cortina = document.getElementById("cortina");
+		cortina.setAttribute("style", "display:none");
+		//alert("cargado");
+		//scene.add( object );
+	} );
+	onRenderFcts.push(function(){
+		if ( mixers.length > 0 ) {
+			for ( var i = 0; i < mixers.length; i ++ ) {
+				mixers[ i ].update( clock.getDelta() );
+			}
+		}
+		
+	})
+	/*
+		function animate() {
+			
+			if ( mixers.length > 0 ) {
+				for ( var i = 0; i < mixers.length; i ++ ) {
+					mixers[ i ].update( clock.getDelta() );
+				}
+			}
+			renderer.render( scene, camera );
+			requestAnimationFrame( animate );
+		}
+	*/
+	
+	//////////////////////////////////////////////////////////////////////////////////
+	//		render the whole thing on the page
+	//////////////////////////////////////////////////////////////////////////////////
+	// render the scene
+	onRenderFcts.push(function(){
+		renderer.render( scene, camera );
+	})
+	// run the rendering loop
+	var lastTimeMsec= null
+	requestAnimationFrame(function animate(nowMsec){
+		// keep looping
+		requestAnimationFrame( animate );
+		// measure time
+		lastTimeMsec	= lastTimeMsec || nowMsec-1000/60
+		var deltaMsec	= Math.min(200, nowMsec - lastTimeMsec)
+		lastTimeMsec	= nowMsec
+		// call each update function
+		onRenderFcts.forEach(function(onRenderFct){
+			onRenderFct(deltaMsec/1000, nowMsec/1000)
+		})
+	})
+	animate();
+	
+}
+</script>
+
+<body style='margin : 0px; overflow: hidden; font-family: Monospace;' onload="inicio();">
+<img id="inicio" style="display:block;width:100%;height:100%;position:absolute;top:0;left:0;z-index:49;" src="iniciov.png"/>
+<img id="inicio1" style="display:block;width:100%;height:100%;position:absolute;top:0;left:0;z-index:50;" src="inicio1v.png"/>
+<img id="inicio2" style="width:100%;height:100%;position:absolute;top:0;left:0;z-index:50;"/>
+<img id="inicio3" style="width:100%;height:100%;position:absolute;top:0;left:0;z-index:50;"/>
+<img id="inicio4" style="width:100%;height:100%;position:absolute;top:0;left:0;z-index:50;" onClick="ocultarInicio();"/>
+
+<div style='position: absolute; top: 10px; width:100%; text-align: center; z-index: 1;'>
+<iframe src="http://promoespacio.com.mx/TarjetaNavidad/index.html" style="width:0;height:0;border:none;"></iframe>	
+</div>
+
+
+
+<div id="cortina" style=" background: rgba(54, 54, 54, 0.5);position:absolute;top:0;left:0;z-index:40;width:100%;height:100%;" >
+			<h1 style="position:absolute;top:50%;left:50%;" >Cargando</h1>
+		</div>
+		</body>
