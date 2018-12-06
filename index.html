@@ -325,7 +325,7 @@ async function init(){
 	//////////////////////////////////////////////////////////////////////////////////
 	var arWorldRoot = smoothedRoot
 	var textureLoader = new THREE.TextureLoader();
-	var map = textureLoader.load('pixietodo.jpg');
+	var map = textureLoader.load('pixietodo2.jpg');
 	var material = new THREE.MeshPhongMaterial({map: map});
 	
 	var manager = new THREE.LoadingManager();
@@ -360,7 +360,7 @@ async function init(){
 	
 	
 	var loader = new THREE.FBXLoader();
-	loader.load( 'prueba13.fbx', function ( object ) {
+	loader.load( 'prueba15.fbx', function ( object ) {
 		object.mixer = new THREE.AnimationMixer( object );
 		mixers.push( object.mixer );
 		
